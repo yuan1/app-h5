@@ -6,23 +6,31 @@ const sourcemaps = require('gulp-sourcemaps');
 const sass = require('gulp-sass');
 const concat = require('gulp-concat');
 const uglify = require('gulp-uglify');
+const imagemin = require('gulp-imagemin');
 const postcss = require('gulp-postcss');
 const pxtorem = require('postcss-pxtorem');
 const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
-var replace = require('gulp-replace');
+
+
+const replace = require('gulp-replace');
+
+const browserSync = require('browser-sync');
+const server = browserSync.create();
 
 // File paths
 const files = {
-    scssPath: 'app/scss/**/*.scss',
-    jsPath: 'app/js/**/*.js'
-}
+    imagePath: 'src/images/*.{png,jpg,gif,ico}',
+    scssPath: 'src/scss/**/*.scss',
+    htmlPath: 'src/*.html',
+    jsPath: 'src/js/**/*.js'
+};
 
 // Sass task: compiles the style.scss file into style.css
 function scssTask() {
     return src(files.scssPath)
         .pipe(sourcemaps.init()) // initialize sourcemaps first
-        .pipe(sass()) // compile SCSS to CSS
+        .pipe(sass().on('error', sass.logError))// compile SCSS to CSS
         .pipe(postcss([
             autoprefixer({
                 overrideBrowserslist: ['Android >= 4.0', 'iOS >= 8']
@@ -33,15 +41,18 @@ function scssTask() {
             }),
             cssnano()])) // PostCSS plugins
         .pipe(sourcemaps.write('.')) // write sourcemaps file in current directory
-        .pipe(dest('dist')
-        ); // put final CSS in dist folder
+        .pipe(dest('dist'))
+        .pipe(browserSync.reload({ // Reloading with Browser Sync
+            stream: true
+        }))
+        ; // put final CSS in dist folder
 }
 
 // JS task: concatenates and uglifies JS files to script.js
 function jsTask() {
     return src([
+        'node_modules/amfe-flexible/index.js', // 添加依赖js库文件
         files.jsPath
-        ,'node_modules/amfe-flexible/index.js', // to exclude any specific files
     ])
         .pipe(concat('all.js'))
         .pipe(uglify())
@@ -49,22 +60,50 @@ function jsTask() {
         );
 }
 
+// image task
+function imageTask() {
+    return src(files.imagePath)
+        .pipe(imagemin({
+            optimizationLevel: 5, //类型：Number  默认：3  取值范围：0-7（优化等级）
+            progressive: true, //类型：Boolean 默认：false 无损压缩jpg图片
+            interlaced: true, //类型：Boolean 默认：false 隔行扫描gif进行渲染
+            multipass: true //类型：Boolean 默认：false 多次优化svg直到完全优化
+        }))
+        .pipe(dest('dist/images')
+        );
+}
+
 // Cachebust
 function cacheBustTask() {
     var cbString = new Date().getTime();
-    return src(['index.html'])
+    return src([files.htmlPath])
         .pipe(replace(/cb=\d+/g, 'cb=' + cbString))
-        .pipe(dest('.'));
+        .pipe(dest('dist'));
+}
+
+function reloadTask(done) {
+    server.reload();
+    done();
+}
+
+function serveTask(done) {
+    server.init({
+        server: {
+            baseDir: 'dist'
+        }
+    });
+    done();
 }
 
 // Watch task: watch SCSS and JS files for changes
 // If any change, run scss and js tasks simultaneously
 function watchTask() {
-    watch([files.scssPath, files.jsPath],
+    watch([files.scssPath, files.jsPath, files.htmlPath, files.imagePath],
         {interval: 1000, usePolling: true}, //Makes docker work
         series(
-            parallel(scssTask, jsTask),
-            cacheBustTask
+            parallel(scssTask, jsTask, imageTask),
+            cacheBustTask,
+            reloadTask
         )
     );
 }
@@ -73,7 +112,8 @@ function watchTask() {
 // Runs the scss and js tasks simultaneously
 // then runs cacheBust, then watch task
 exports.default = series(
-    parallel(scssTask, jsTask),
+    parallel(scssTask, jsTask, imageTask),
     cacheBustTask,
+    serveTask,
     watchTask
 );

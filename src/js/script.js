@@ -1,4 +1,4 @@
 console.log("Load script.js");
 
-// Instantiating the global app object
+// Instantiating the global src object
 var app = {};
