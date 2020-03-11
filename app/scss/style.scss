@@ -1,0 +1,11 @@
+@import "global";
+
+.main{
+  width: 375px;
+  height: 600px;
+  background: red;
+}
+// `px` is converted to `rem`
+.convert {
+  font-size: 16px; // converted to 1rem
+}

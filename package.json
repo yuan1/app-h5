@@ -1,0 +1,23 @@
+{
+  "name": "app-h5",
+  "version": "1.0.0",
+  "description": "Simple Web using Gulp 4",
+  "main": "gulpfile.js",
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^9.7.0",
+    "cssnano": "^4.1.10",
+    "gulp": "^4.0.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-postcss": "^8.0.0",
+    "gulp-replace": "^1.0.0",
+    "gulp-sass": "^4.0.2",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp-uglify": "^3.0.2",
+    "postcss-pxtorem": "^5.1.1"
+  },
+  "dependencies": {
+    "amfe-flexible": "^2.2.1"
+  }
+}
