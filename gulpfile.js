@@ -12,6 +12,7 @@ const pxtorem = require('postcss-pxtorem');
 const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
 
+const clean = require('gulp-clean');
 
 const replace = require('gulp-replace');
 
@@ -23,7 +24,8 @@ const files = {
     imagePath: 'src/images/*.{png,jpg,gif,ico}',
     scssPath: 'src/scss/**/*.scss',
     htmlPath: 'src/*.html',
-    jsPath: 'src/js/**/*.js'
+    jsPath: 'src/js/**/*.js',
+    jsLibPath: 'src/lib/**/*.js'
 };
 
 // Sass task: compiles the style.scss file into style.css
@@ -50,11 +52,20 @@ function scssTask() {
 
 // JS task: concatenates and uglifies JS files to script.js
 function jsTask() {
+    return src(files.jsPath)
+        .pipe(concat('all.js'))
+        .pipe(uglify())
+        .pipe(dest('dist')
+        );
+}
+
+// JS task: concatenates and uglifies JS files to script.js
+function jsLibTask() {
     return src([
         'node_modules/amfe-flexible/index.js', // 添加依赖js库文件
-        files.jsPath
+        files.jsLibPath, // 添加依赖js库文件
     ])
-        .pipe(concat('all.js'))
+        .pipe(concat('lib.js'))
         .pipe(uglify())
         .pipe(dest('dist')
         );
@@ -80,7 +91,12 @@ function cacheBustTask() {
         .pipe(replace(/cb=\d+/g, 'cb=' + cbString))
         .pipe(dest('dist'));
 }
+// clean task
 
+function cleanTask() {
+    return src('dist', {read: false})
+        .pipe(clean());
+}
 function reloadTask(done) {
     server.reload();
     done();
@@ -101,7 +117,7 @@ function watchTask() {
     watch([files.scssPath, files.jsPath, files.htmlPath, files.imagePath],
         {interval: 1000, usePolling: true}, //Makes docker work
         series(
-            parallel(scssTask, jsTask, imageTask),
+            parallel(scssTask, jsTask, jsLibTask, imageTask),
             cacheBustTask,
             reloadTask
         )
@@ -112,7 +128,8 @@ function watchTask() {
 // Runs the scss and js tasks simultaneously
 // then runs cacheBust, then watch task
 exports.default = series(
-    parallel(scssTask, jsTask, imageTask),
+    cleanTask,
+    parallel(scssTask, jsTask, jsLibTask, imageTask),
     cacheBustTask,
     serveTask,
     watchTask

@@ -13,6 +13,7 @@
     "browser-sync": "^2.26.7",
     "cssnano": "^4.1.10",
     "gulp": "^4.0.2",
+    "gulp-clean": "^0.4.0",
     "gulp-concat": "^2.6.1",
     "gulp-imagemin": "^7.1.0",
     "gulp-postcss": "^8.0.0",
@@ -23,6 +24,7 @@
     "postcss-pxtorem": "^5.1.1"
   },
   "dependencies": {
-    "amfe-flexible": "^2.2.1"
+    "amfe-flexible": "^2.2.1",
+    "islider.js": "^2.2.5"
   }
 }

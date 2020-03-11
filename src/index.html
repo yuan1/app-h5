@@ -5,12 +5,25 @@
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <!-- Needed for responsive design -->
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta content="telephone=no,email=no" name="format-detection">
     <title></title>
     <!-- CSS File -->
     <link rel="stylesheet" href="style.css?cb=1583897431037">
-    <link rel="stylesheet" href="scss/swiper.min.css">
+    <style>
+        @media screen and (min-width: 1025px) {
+            html {
+                font-size: 48px !important;
+            }
+            body {
+                max-width: 10rem;
+                margin: 0 auto !important;
+                box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.16);
+            }
+        }
+    </style>
 </head>
 <body>
 <div class="main">
@@ -29,17 +42,13 @@
         </div>
     </div>
     <div class="main-content">
-        <img src="images/banner-icon.png" alt="">
-        <div class="swiper-container">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide"> <img src="images/banner-icon.png" alt=""></div>
-                <div class="swiper-slide"> <img src="images/banner-icon.png" alt=""></div>
-                <div class="swiper-slide"> <img src="images/banner-icon.png" alt=""></div>
+        <div id="slider" class="swipe">
+            <div class="swipe-wrap">
+                <div><img src="images/banner-icon.png" alt=""></div>
+                <div><img src="images/banner-icon.png" alt=""></div>
+                <div><img src="images/banner-icon.png" alt=""></div>
             </div>
-            <!-- 如果需要分页器 -->
-            <div class="swiper-pagination"></div>
         </div>
-
         <div class="main-nav">
             <div class="m-n-content">
                 <img src="images/nav-notice.png" alt="">
@@ -64,10 +73,10 @@
                 <span>更多</span>
             </div>
             <div class="m-r-article">
-               <div class="m-r-title">
-                   <span>热点</span>
-                   2018年12月份大秦线完成煤炭运输量3836万吨，同比下降0.52%
-               </div>
+                <div class="m-r-title">
+                    <span>热点</span>
+                    2018年12月份大秦线完成煤炭运输量3836万吨，同比下降0.52%
+                </div>
                 <div class="m-r-img">
                     <img src="images/banner-icon.png" alt="">
                     <img src="images/banner-icon.png" alt="">
@@ -82,10 +91,10 @@
                             <img src="images/pointer-icon.png" alt="">
                             <strong>53</strong>
                         </div>
-                       <div class="m-r-a-num">
-                           <img src="images/comment-icon.png" alt="">
-                           <strong>26</strong>
-                       </div>
+                        <div class="m-r-a-num">
+                            <img src="images/comment-icon.png" alt="">
+                            <strong>26</strong>
+                        </div>
 
                     </div>
                 </div>
@@ -95,10 +104,10 @@
                     <span>原创</span>
                     光伏沉浮录Ⅰ：首富们的崛起
                 </div>
-                 <div class="m-r-content">
-                     <p>语雀 一款优雅高效的在线文档编辑与协同工具，让每个企业轻松拥有文档中心阿里巴巴集团内部使用多年，众多中小企业首选。语雀是一款优雅高效的在线文档…</p>
-                     <img src="images/banner-icon.png" alt="">
-                 </div>
+                <div class="m-r-content">
+                    <p class="more-4">语雀 一款优雅高效的在线文档编辑与协同工具一款优雅高效的在线文档编辑与协同工具一款优雅高效的在线文档编辑与协同工具一款优雅高效的在线文档编辑与协同工具一款优雅高效的在线文档编辑与协同工具，让每个企业轻松拥有文档中心阿里巴巴集团内部使用多年，众多中小企业首选。语雀是一款优雅高效的在线文档…</p>
+                    <img src="images/banner-icon.png" alt="">
+                </div>
                 <div class="m-r-author">
                     <div>
                         供应链<span></span>2小时前
@@ -120,24 +129,24 @@
                 <div class="m-r-title">
                     2018年12月份大秦线完成煤炭运输量3836万吨，同比下降0.52%
                 </div>
-                <div class="m-r-content">
+                <div class="m-r-content more-3">
                     语雀 一款优雅高效的在线文档编辑与协同工具， 让每个企业轻松拥有文档中心阿里巴巴集团内部使用多年，众多中小企业首选。语雀是一款优雅高效的在线文档是一款优雅高效的在线文…
                 </div>
                 <div class="m-r-author">
-                <div>
-                    供应链<span></span>2小时前
-                </div>
-                <div class="m-r-a-right">
-                    <div class="m-r-a-num">
-                        <img src="images/pointer-icon.png" alt="">
-                        <strong>53</strong>
+                    <div>
+                        供应链<span></span>2小时前
                     </div>
-                    <div class="m-r-a-num">
-                        <img src="images/comment-icon.png" alt="">
-                        <strong>26</strong>
+                    <div class="m-r-a-right">
+                        <div class="m-r-a-num">
+                            <img src="images/pointer-icon.png" alt="">
+                            <strong>53</strong>
+                        </div>
+                        <div class="m-r-a-num">
+                            <img src="images/comment-icon.png" alt="">
+                            <strong>26</strong>
+                        </div>
                     </div>
                 </div>
-            </div>
             </div>
             <div class="m-r-article">
                 <div class="m-r-title">
@@ -166,8 +175,8 @@
                 <div class="m-r-title">
                     2018年12月份大秦线完成煤炭运输量3836万吨，同比下降0.52%
                 </div>
-                <div class="m-r-content">
-                    语雀 一款优雅高效的在线文档编辑与协同工具， 让每个企业轻松拥有文档中心阿里巴巴集团内部使用多年，众多中小企业首选。语雀是一款优雅高效的在线文档是一款优雅高效的在线文…
+                <div class="m-r-content more-3">
+                    语雀 一款优雅高效的在线文档编辑与协同工具一款优雅高效的在线文档编辑与协同工具一款优雅高效的在线文档编辑与协同工具一款优雅高效的在线文档编辑与协同工具， 让每个企业轻松拥有文档中心阿里巴巴集团内部使用多年，众多中小企业首选。语雀是一款优雅高效的在线文档是一款优雅高效的在线文…
                 </div>
                 <div class="m-r-author">
                     <div>
@@ -209,20 +218,7 @@
     </div>
 </div>
 <!-- JavaScript File -->
+<script src="lib.js?cb=1583897431037"></script>
 <script src="all.js?cb=1583897431037"></script>
-<script src="js/swiper.min.js"></script>
-<script>
-        $(document).ready(function () {
-            var swiper = new Swiper('.swiper-container', {
-                spaceBetween: 30,
-                autoplay:true,
-                effect: 'fade',
-                loop: true, // 循环模式选项
-                pagination: {
-                    el: '.swiper-pagination',
-                },
-            });
-        });
-</script>
 </body>
 </html>
