@@ -25,7 +25,7 @@ function scssTask() {
         .pipe(sass()) // compile SCSS to CSS
         .pipe(postcss([
             autoprefixer({
-                browsers: ['Android >= 4.0', 'iOS >= 8']
+                overrideBrowserslist: ['Android >= 4.0', 'iOS >= 8']
             }),
             pxtorem({
                 rootValue: 37.5,
