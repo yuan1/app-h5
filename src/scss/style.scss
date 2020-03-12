@@ -59,7 +59,7 @@ html, body {
       align-items: center;
       justify-content: space-between;
       font-size: 15px;
-      border-top: 2px solid #F1F2F6;
+      border-top: 1px solid #F1F2F6;
 
       img {
         width: 22px;
@@ -88,7 +88,7 @@ html, body {
       padding: 8px 30px 11px;
       display: flex;
       justify-content: space-between;
-      border-bottom: 2px solid #F1F2F6;
+      border-bottom: 1px solid #F1F2F6;
       margin-bottom: 10px;
 
       .m-n-content {
@@ -168,7 +168,7 @@ html, body {
         align-items: center;
         padding: 0 16px;
         justify-content: space-between;
-        border-bottom: 2px solid #F1F2F6;
+        border-bottom: 1px solid #F1F2F6;
 
         p {
           font-size: 15px;
@@ -186,7 +186,7 @@ html, body {
       .m-r-article {
         height: auto;
         padding: 8px 16px 10px;
-        border-bottom: 2px solid #F1F2F6;
+        border-bottom: 1px solid #F1F2F6;
 
         .m-r-img {
           display: flex;
@@ -197,6 +197,7 @@ html, body {
         img {
           width: 110px;
           height: 75px;
+          object-fit: cover;
         }
 
         .m-r-content {
